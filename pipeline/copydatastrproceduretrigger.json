@@ -1,0 +1,120 @@
+{
+	"name": "copydatastrproceduretrigger",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "dataset_SQL_table",
+						"type": "DatasetReference",
+						"parameters": {
+							"TableName": {
+								"value": "@pipeline().parameters.tablenamefrompipeline",
+								"type": "Expression"
+							},
+							"dbname_datasetscope": {
+								"value": "@pipeline().parameters.dbnamefrompipeline",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "dataset_SQL_table",
+						"type": "DatasetReference",
+						"parameters": {
+							"TableName": {
+								"value": "@pipeline().parameters.destinationtable",
+								"type": "Expression"
+							},
+							"dbname_datasetscope": {
+								"value": "@pipeline().parameters.destinationdbname",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "storedprocedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": {
+						"value": "@pipeline().DataFactory",
+						"type": "Expression"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "SqlServer2",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"tablenamefrompipeline": {
+				"type": "string"
+			},
+			"dbnamefrompipeline": {
+				"type": "string"
+			},
+			"destinationtable": {
+				"type": "string"
+			},
+			"destinationdbname": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-02-05T04:53:20Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

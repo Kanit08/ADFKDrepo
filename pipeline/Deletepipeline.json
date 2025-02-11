@@ -1,0 +1,47 @@
+{
+	"name": "Deletepipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "Delete1",
+				"type": "Delete",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "filesdeleted",
+						"value": "CSV file deleted"
+					}
+				],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "deletedata",
+						"type": "DatasetReference"
+					},
+					"logStorageSettings": {
+						"linkedServiceName": {
+							"referenceName": "Practicestoragekdlinkservice",
+							"type": "LinkedServiceReference"
+						},
+						"path": "datafactorykdcontnr"
+					},
+					"enableLogging": true,
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"recursive": false,
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2025-02-05T05:56:02Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

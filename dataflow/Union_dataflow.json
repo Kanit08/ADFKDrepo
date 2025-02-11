@@ -1,0 +1,65 @@
+{
+	"name": "Union_dataflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "IT",
+						"type": "DatasetReference"
+					},
+					"name": "IT"
+				},
+				{
+					"dataset": {
+						"referenceName": "HR",
+						"type": "DatasetReference"
+					},
+					"name": "HR"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "outputempdept",
+						"type": "DatasetReference"
+					},
+					"name": "sinkunion"
+				}
+			],
+			"transformations": [
+				{
+					"name": "union"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          emp as string,",
+				"          name as string,",
+				"          dept as string,",
+				"          grade as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> IT",
+				"source(output(",
+				"          emp as string,",
+				"          name as string,",
+				"          dept as string,",
+				"          grade as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> HR",
+				"IT, HR union(byName: true)~> union",
+				"union sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['Uniondata'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sinkunion"
+			]
+		}
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"name": "SqlSererlinkservie",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "abcd.company.net",
+			"database": "kanitabce",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "Kanit",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEQzRjBFNjRFLUQwNjktNDNGQi1BNDY0LTVEMTVEMkRCNUNGM185MmUxYjBiNC02ZWQ2LTQxYTUtOWZjZi1hNzg5YTQwZjhhMzgiDQp9"
+		}
+	}
+}

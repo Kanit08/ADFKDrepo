@@ -1,0 +1,27 @@
+{
+	"name": "outputlookup",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Practicestoragekdlinkservice",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"foldername": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": {
+					"value": "@dataset().foldername",
+					"type": "Expression"
+				},
+				"container": "datafactorykdcontnr"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

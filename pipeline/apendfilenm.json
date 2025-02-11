@@ -1,0 +1,38 @@
+{
+	"name": "apendfilenm",
+	"properties": {
+		"activities": [
+			{
+				"name": "Append variable1",
+				"type": "AppendVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "sales_var",
+					"value": {
+						"value": "@string(pipeline().parameters.file_apend)",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"file_apend": {
+				"type": "string",
+				"defaultValue": "SalesInd"
+			}
+		},
+		"variables": {
+			"sales_var": {
+				"type": "Array",
+				"defaultValue": [
+					"pak",
+					"end"
+				]
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-02-05T08:38:14Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

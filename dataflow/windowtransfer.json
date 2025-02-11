@@ -1,0 +1,53 @@
+{
+	"name": "windowtransfer",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "windowtransferin",
+						"type": "DatasetReference"
+					},
+					"name": "transferwindow"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "outputempdept",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "window"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          emp as short,",
+				"          name as string,",
+				"          dept as string,",
+				"          gender as string,",
+				"          salary as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     inferDriftedColumnTypes: true,",
+				"     ignoreNoFilesFound: false) ~> transferwindow",
+				"transferwindow window(over({average salary} = dept),",
+				"     asc(salary, true),",
+				"     avgsalary = avg(salary)) ~> window",
+				"window sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['transferwindow'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1"
+			]
+		}
+	}
+}

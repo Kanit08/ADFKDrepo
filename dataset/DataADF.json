@@ -1,0 +1,25 @@
+{
+	"name": "DataADF",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Practicestoragekdlinkservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "dataADF.csv",
+				"folderPath": "Input",
+				"container": "datafactorykdcontnr"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,27 @@
+{
+	"name": "copyifdata",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Practicestoragekdlinkservice",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"outputpath": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": {
+					"value": "@dataset().outputpath",
+					"type": "Expression"
+				},
+				"container": "datafactorykdcontnr"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

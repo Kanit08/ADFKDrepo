@@ -1,0 +1,29 @@
+{
+	"name": "Masterpipelineexecute",
+	"properties": {
+		"activities": [
+			{
+				"name": "Execute Pipeline1",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "settingupvariables",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"filenamep": "Salesind"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2025-02-05T08:38:14Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

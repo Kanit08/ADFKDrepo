@@ -1,0 +1,55 @@
+{
+	"name": "Select_DF",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "empdata",
+						"type": "DatasetReference"
+					},
+					"name": "selectemp"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "outputempdept",
+						"type": "DatasetReference"
+					},
+					"name": "outselect"
+				}
+			],
+			"transformations": [
+				{
+					"name": "empselect"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          emp as string,",
+				"          name as string,",
+				"          dept as string,",
+				"          grade as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> selectemp",
+				"selectemp select(mapColumn(",
+				"          Name = name,",
+				"          Employee = emp,",
+				"          Deprtment = dept",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> empselect",
+				"empselect sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['selectout'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> outselect"
+			]
+		}
+	}
+}

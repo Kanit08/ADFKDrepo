@@ -1,0 +1,78 @@
+{
+	"name": "Splitdataflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "empdata",
+						"type": "DatasetReference"
+					},
+					"name": "employedata"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "outputsplit",
+						"type": "DatasetReference"
+					},
+					"name": "sinkIT"
+				},
+				{
+					"dataset": {
+						"referenceName": "outputsplit",
+						"type": "DatasetReference"
+					},
+					"name": "sinkHR"
+				},
+				{
+					"dataset": {
+						"referenceName": "outputsplit",
+						"type": "DatasetReference"
+					},
+					"name": "sinkFinance"
+				}
+			],
+			"transformations": [
+				{
+					"name": "Finance"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          emp as string,",
+				"          name as string,",
+				"          dept as string,",
+				"          grade as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> employedata",
+				"employedata split(dept==\"D1\",",
+				"     dept==\"D2\",",
+				"     dept==\"D3\",",
+				"     disjoint: false) ~> Finance@(IT, HR, Finance)",
+				"Finance@IT sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['IT'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sinkIT",
+				"Finance@HR sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['HR'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sinkHR",
+				"Finance@Finance sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['Finance'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sinkFinance"
+			]
+		}
+	}
+}

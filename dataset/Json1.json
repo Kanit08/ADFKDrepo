@@ -1,0 +1,57 @@
+{
+	"name": "Json1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Practicestoragekdlinkservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "sample1.json",
+				"folderPath": "Input",
+				"container": "datafactorykdcontnr"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string"
+				},
+				"age": {
+					"type": "integer"
+				},
+				"city": {
+					"type": "string"
+				},
+				"married": {
+					"type": "boolean"
+				},
+				"hobbies": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"address": {
+					"type": "object",
+					"properties": {
+						"street": {
+							"type": "string"
+						},
+						"city": {
+							"type": "string"
+						},
+						"postal_code": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

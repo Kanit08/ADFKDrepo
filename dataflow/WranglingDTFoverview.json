@@ -1,0 +1,20 @@
+{
+	"name": "WranglingDTFoverview",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "empdata",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> empdata",
+					"dataset": {
+						"referenceName": "empdata",
+						"type": "DatasetReference"
+					}
+				}
+			],
+			"script": "section Section1;\r\nshared empdata = let AdfDoc = AzureStorage.BlobContents(\"https://storagekdsa.blob.core.windows.net/datafactorykdcontnr/Input/Empdata.csv\"),Csv = Csv.Document(AdfDoc, [Delimiter = \",\", Encoding = TextEncoding.Utf8, QuoteStyle = QuoteStyle.Csv]), PromotedHeaders = Table.PromoteHeaders(Csv, [PromoteAllScalars = true]) in  PromotedHeaders;\r\nshared UserQuery = let Source = #\"empdata\",\r\n  #\"Removed columns\" = Table.RemoveColumns(Source, {\"grade\"}) in #\"Removed columns\";\r\n",
+			"documentLocale": "en-us"
+		}
+	}
+}

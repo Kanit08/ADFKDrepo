@@ -1,0 +1,38 @@
+{
+	"name": "settingupvariables",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set_frequency",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "frequency",
+					"value": {
+						"value": "@replace(pipeline().parameters.filenamep,'Sales','')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"filenamep": {
+				"type": "string",
+				"defaultValue": "DailySales"
+			}
+		},
+		"variables": {
+			"frequency": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-02-05T08:15:33Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

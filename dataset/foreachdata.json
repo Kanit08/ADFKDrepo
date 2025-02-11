@@ -1,0 +1,27 @@
+{
+	"name": "foreachdata",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Practicestoragekdlinkservice",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"foldernme": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": {
+					"value": "@dataset().foldernme",
+					"type": "Expression"
+				},
+				"container": "datafactorykdcontnr"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

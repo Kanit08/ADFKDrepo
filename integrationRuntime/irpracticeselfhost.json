@@ -1,0 +1,6 @@
+{
+	"name": "irpracticeselfhost",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
