@@ -1,0 +1,90 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "practicekdadf"
+		},
+		"Practicestoragekdlinkservice_connectionString": {
+			"value": ""
+		},
+		"SqlSererlinkservie_password": {
+			"value": ""
+		},
+		"SqlServer1_password": {
+			"value": ""
+		},
+		"SqlServer2_password": {
+			"value": ""
+		},
+		"SqlServerlookup_password": {
+			"value": ""
+		},
+		"SqlServerstoreprocedure_password": {
+			"value": ""
+		},
+		"SqlSererlinkservie_properties_typeProperties_server": {
+			"value": "abcd.company.net"
+		},
+		"SqlSererlinkservie_properties_typeProperties_database": {
+			"value": "kanitabce"
+		},
+		"SqlSererlinkservie_properties_typeProperties_userName": {
+			"value": "Kanit"
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"value": "mydbserver.windows.net"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"value": "@{linkedService().dbName}"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"value": "kanit"
+		},
+		"SqlServer2_properties_typeProperties_server": {
+			"value": "@{linkedService().server}"
+		},
+		"SqlServer2_properties_typeProperties_database": {
+			"value": "@{linkedService().dbname}"
+		},
+		"SqlServer2_properties_typeProperties_userName": {
+			"value": "@{linkedService().user}"
+		},
+		"SqlServerlookup_properties_typeProperties_server": {
+			"value": "abcd.company.database.windows.net"
+		},
+		"SqlServerlookup_properties_typeProperties_database": {
+			"value": "abcdkanit"
+		},
+		"SqlServerlookup_properties_typeProperties_userName": {
+			"value": "Kanit"
+		},
+		"SqlServerstoreprocedure_properties_typeProperties_server": {
+			"value": "DEVYANI_P"
+		},
+		"SqlServerstoreprocedure_properties_typeProperties_database": {
+			"value": "Test_DB"
+		},
+		"SqlServerstoreprocedure_properties_typeProperties_userName": {
+			"value": "HR"
+		},
+		"trigger1_properties_copydatastrproceduretrigger_parameters_tablenamefrompipeline": {
+			"value": "Table1"
+		},
+		"trigger1_properties_copydatastrproceduretrigger_parameters_dbnamefrompipeline": {
+			"value": "dbsource"
+		},
+		"trigger1_properties_copydatastrproceduretrigger_parameters_destinationtable": {
+			"value": "table2"
+		},
+		"trigger1_properties_copydatastrproceduretrigger_parameters_destinationdbname": {
+			"value": "dbdestination"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

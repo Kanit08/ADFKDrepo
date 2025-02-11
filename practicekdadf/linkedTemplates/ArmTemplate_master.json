@@ -1,0 +1,277 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "practicekdadf"
+		},
+		"Practicestoragekdlinkservice_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Practicestoragekdlinkservice'"
+		},
+		"SqlSererlinkservie_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlSererlinkservie'"
+		},
+		"SqlServer1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer1'"
+		},
+		"SqlServer2_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer2'"
+		},
+		"SqlServerlookup_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServerlookup'"
+		},
+		"SqlServerstoreprocedure_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServerstoreprocedure'"
+		},
+		"SqlSererlinkservie_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "abcd.company.net"
+		},
+		"SqlSererlinkservie_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "kanitabce"
+		},
+		"SqlSererlinkservie_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "Kanit"
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "mydbserver.windows.net"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "@{linkedService().dbName}"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "kanit"
+		},
+		"SqlServer2_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "@{linkedService().server}"
+		},
+		"SqlServer2_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "@{linkedService().dbname}"
+		},
+		"SqlServer2_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "@{linkedService().user}"
+		},
+		"SqlServerlookup_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "abcd.company.database.windows.net"
+		},
+		"SqlServerlookup_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "abcdkanit"
+		},
+		"SqlServerlookup_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "Kanit"
+		},
+		"SqlServerstoreprocedure_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "DEVYANI_P"
+		},
+		"SqlServerstoreprocedure_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "Test_DB"
+		},
+		"SqlServerstoreprocedure_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "HR"
+		},
+		"trigger1_properties_copydatastrproceduretrigger_parameters_tablenamefrompipeline": {
+			"type": "string",
+			"defaultValue": "Table1"
+		},
+		"trigger1_properties_copydatastrproceduretrigger_parameters_dbnamefrompipeline": {
+			"type": "string",
+			"defaultValue": "dbsource"
+		},
+		"trigger1_properties_copydatastrproceduretrigger_parameters_destinationtable": {
+			"type": "string",
+			"defaultValue": "table2"
+		},
+		"trigger1_properties_copydatastrproceduretrigger_parameters_destinationdbname": {
+			"type": "string",
+			"defaultValue": "dbdestination"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "practicekdadf_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"Practicestoragekdlinkservice_connectionString": {
+						"value": "[parameters('Practicestoragekdlinkservice_connectionString')]"
+					},
+					"SqlSererlinkservie_password": {
+						"value": "[parameters('SqlSererlinkservie_password')]"
+					},
+					"SqlServer1_password": {
+						"value": "[parameters('SqlServer1_password')]"
+					},
+					"SqlServer2_password": {
+						"value": "[parameters('SqlServer2_password')]"
+					},
+					"SqlServerlookup_password": {
+						"value": "[parameters('SqlServerlookup_password')]"
+					},
+					"SqlServerstoreprocedure_password": {
+						"value": "[parameters('SqlServerstoreprocedure_password')]"
+					},
+					"SqlSererlinkservie_properties_typeProperties_server": {
+						"value": "[parameters('SqlSererlinkservie_properties_typeProperties_server')]"
+					},
+					"SqlSererlinkservie_properties_typeProperties_database": {
+						"value": "[parameters('SqlSererlinkservie_properties_typeProperties_database')]"
+					},
+					"SqlSererlinkservie_properties_typeProperties_userName": {
+						"value": "[parameters('SqlSererlinkservie_properties_typeProperties_userName')]"
+					},
+					"SqlServer1_properties_typeProperties_server": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_server')]"
+					},
+					"SqlServer1_properties_typeProperties_database": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_database')]"
+					},
+					"SqlServer1_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_userName')]"
+					},
+					"SqlServer2_properties_typeProperties_server": {
+						"value": "[parameters('SqlServer2_properties_typeProperties_server')]"
+					},
+					"SqlServer2_properties_typeProperties_database": {
+						"value": "[parameters('SqlServer2_properties_typeProperties_database')]"
+					},
+					"SqlServer2_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer2_properties_typeProperties_userName')]"
+					},
+					"SqlServerlookup_properties_typeProperties_server": {
+						"value": "[parameters('SqlServerlookup_properties_typeProperties_server')]"
+					},
+					"SqlServerlookup_properties_typeProperties_database": {
+						"value": "[parameters('SqlServerlookup_properties_typeProperties_database')]"
+					},
+					"SqlServerlookup_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServerlookup_properties_typeProperties_userName')]"
+					},
+					"SqlServerstoreprocedure_properties_typeProperties_server": {
+						"value": "[parameters('SqlServerstoreprocedure_properties_typeProperties_server')]"
+					},
+					"SqlServerstoreprocedure_properties_typeProperties_database": {
+						"value": "[parameters('SqlServerstoreprocedure_properties_typeProperties_database')]"
+					},
+					"SqlServerstoreprocedure_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServerstoreprocedure_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "practicekdadf_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'practicekdadf_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "practicekdadf_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'practicekdadf_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "practicekdadf_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"trigger1_properties_copydatastrproceduretrigger_parameters_tablenamefrompipeline": {
+						"value": "[parameters('trigger1_properties_copydatastrproceduretrigger_parameters_tablenamefrompipeline')]"
+					},
+					"trigger1_properties_copydatastrproceduretrigger_parameters_dbnamefrompipeline": {
+						"value": "[parameters('trigger1_properties_copydatastrproceduretrigger_parameters_dbnamefrompipeline')]"
+					},
+					"trigger1_properties_copydatastrproceduretrigger_parameters_destinationtable": {
+						"value": "[parameters('trigger1_properties_copydatastrproceduretrigger_parameters_destinationtable')]"
+					},
+					"trigger1_properties_copydatastrproceduretrigger_parameters_destinationdbname": {
+						"value": "[parameters('trigger1_properties_copydatastrproceduretrigger_parameters_destinationdbname')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'practicekdadf_ArmTemplate_2')]"
+			]
+		}
+	]
+}
