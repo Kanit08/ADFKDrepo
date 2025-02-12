@@ -1,5 +1,5 @@
 {
-	"name": "globalparameter",
+	"name": "globalparameter1",
 	"properties": {
 		"activities": [
 			{
@@ -74,7 +74,7 @@
 		"parameters": {
 			"filenamep": {
 				"type": "string",
-				"defaultValue": "Empdata.csv"
+				"defaultValue": "Deptdata.csv"
 			}
 		},
 		"annotations": []
