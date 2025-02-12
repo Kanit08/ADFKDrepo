@@ -1,0 +1,47 @@
+{
+	"name": "cachemaxsal",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "windowtransferin",
+						"type": "DatasetReference"
+					},
+					"name": "empsal"
+				}
+			],
+			"sinks": [
+				{
+					"name": "sinkout"
+				}
+			],
+			"transformations": [
+				{
+					"name": "maxsal"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          emp as string,",
+				"          name as string,",
+				"          dept as string,",
+				"          gender as string,",
+				"          salary as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> empsal",
+				"empsal aggregate(maxsalary = max(toInteger(salary))) ~> maxsal",
+				"maxsal sink(validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     store: 'cache',",
+				"     format: 'inline',",
+				"     output: true,",
+				"     saveOrder: 1) ~> sinkout"
+			]
+		}
+	}
+}

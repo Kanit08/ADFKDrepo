@@ -1,0 +1,64 @@
+{
+	"name": "cachemaxsal",
+	"properties": {
+		"activities": [
+			{
+				"name": "cachemaxsalpipe",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "cachemaxsal",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "None",
+					"cacheSinks": {
+						"firstRowOnly": true
+					}
+				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "cachemaxsalpipe",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "maxsal",
+					"value": {
+						"value": "@string(activity('cachemaxsalpipe').output.runStatus.output.sinkout.value[0].maxsalary)",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"maxsal": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
