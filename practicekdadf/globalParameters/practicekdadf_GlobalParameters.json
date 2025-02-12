@@ -1,1 +1,6 @@
-{}
+{
+	"rootglobal": {
+		"type": "string",
+		"value": "datafactorykdcontnr/Input"
+	}
+}
