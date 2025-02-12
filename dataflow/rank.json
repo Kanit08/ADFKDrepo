@@ -1,0 +1,52 @@
+{
+	"name": "rank",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "windowtransferin",
+						"type": "DatasetReference"
+					},
+					"name": "inputsalfile"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "outputempdept",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "rank1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          emp as string,",
+				"          name as string,",
+				"          dept as string,",
+				"          gender as string,",
+				"          salary as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> inputsalfile",
+				"inputsalfile rank(desc(salary, true),",
+				"     output({Rank in salary} as long),",
+				"     dense: true) ~> rank1",
+				"rank1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['Ranking'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1"
+			]
+		}
+	}
+}
