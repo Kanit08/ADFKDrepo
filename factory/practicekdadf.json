@@ -1,5 +1,13 @@
 {
 	"name": "practicekdadf",
+	"properties": {
+		"globalParameters": {
+			"rootglobal": {
+				"type": "string",
+				"value": "datafactorykdcontnr/Input"
+			}
+		}
+	},
 	"location": "eastus",
 	"identity": {
 		"type": "SystemAssigned",
