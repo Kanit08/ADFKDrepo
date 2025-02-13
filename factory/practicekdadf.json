@@ -6,6 +6,9 @@
 				"type": "string",
 				"value": "datafactorykdcontnr/Input"
 			}
+		},
+		"globalConfigurations": {
+			"PipelineBillingEnabled": "true"
 		}
 	},
 	"location": "eastus",
