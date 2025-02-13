@@ -1,0 +1,41 @@
+{
+	"name": "userdefinedgenderinteger",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "genderint",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				}
+			],
+			"udfLibraries": [
+				{
+					"referenceName": "userdefinedgenderint",
+					"type": "DataFlowReference"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          emp as string,",
+				"          name as string,",
+				"          dept as string,",
+				"          gender as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 derive(gender = usergenderinteger(gender)) ~> derivedColumn1"
+			]
+		}
+	}
+}

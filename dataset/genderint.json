@@ -1,0 +1,41 @@
+{
+	"name": "genderint",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Practicestoragekdlinkservice",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "emp_userdefined_function.csv",
+				"folderPath": "Input",
+				"container": "datafactorykdcontnr"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "emp",
+				"type": "String"
+			},
+			{
+				"name": "name",
+				"type": "String"
+			},
+			{
+				"name": "dept",
+				"type": "String"
+			},
+			{
+				"name": "gender",
+				"type": "String"
+			}
+		]
+	}
+}
