@@ -1,0 +1,44 @@
+{
+	"name": "casting",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "casinput",
+						"type": "DatasetReference"
+					},
+					"name": "castdata"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "cast1"
+				},
+				{
+					"name": "split1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          emp as string,",
+				"          name as string,",
+				"          dept as string,",
+				"          gender as string,",
+				"          doj as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> castdata",
+				"castdata cast(output(",
+				"          emp as string",
+				"     ),",
+				"     errors: true) ~> cast1",
+				"cast1 split(!isNull(isError()),",
+				"     disjoint: false) ~> split1@(goodrow, badrow)"
+			]
+		}
+	}
+}
