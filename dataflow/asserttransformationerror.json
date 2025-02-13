@@ -1,0 +1,60 @@
+{
+	"name": "asserttransformationerror",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "empbadata",
+						"type": "DatasetReference"
+					},
+					"name": "emperror"
+				},
+				{
+					"dataset": {
+						"referenceName": "dept",
+						"type": "DatasetReference"
+					},
+					"name": "dept"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "asserterror"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "filter1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          emp as string,",
+				"          name as string,",
+				"          dept as string,",
+				"          gender as string,",
+				"          doj as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> emperror",
+				"source(output(",
+				"          dept as string,",
+				"          deptname as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> dept",
+				"emperror, dept assert(expectExists(emperror@dept == dept@dept, false, 'deptnam'),",
+				"     expectUnique(emp, false, 'uniqueID'),",
+				"     expectTrue(!isNull(toDate(doj,'yyyyMMdd')), false, 'dateformat')) ~> asserterror",
+				"asserterror derive(errorcolumn = isError()) ~> derivedColumn1",
+				"derivedColumn1 filter(errorcolumn==false()) ~> filter1"
+			]
+		}
+	}
+}
