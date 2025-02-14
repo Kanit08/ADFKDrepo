@@ -1,0 +1,24 @@
+{
+	"name": "pipelinemainreturn",
+	"properties": {
+		"activities": [
+			{
+				"name": "pipelinereturnsetvalue",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pipelinereturnsetvalue",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": []
+	}
+}
